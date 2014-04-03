@@ -1,7 +1,7 @@
 ButtonGroup
 ===========
 
-A little library to control a press-button for the Arduino platform.
+A little library to control several press-buttons for the Arduino platform.
 
 It is pretty easy used. The available methods are:
 
