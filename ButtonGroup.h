@@ -10,6 +10,7 @@ struct button {
 	int pin;
 	int mode;
 	void (*f)();
+	long last_rising;
 };
 
 class ButtonGroup {
