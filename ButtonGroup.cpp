@@ -12,7 +12,7 @@ ButtonGroup::ButtonGroup(int dimension) {
 
 }
 
- void ButtonGroup::addButton(int pin, void (*f)(int)){
+ void ButtonGroup::addButton(int pin, void (*f)()){
 	button b = {0, 0, pin, f};
 	buttons[count] = b;
 	pinMode(pin, INPUT);
@@ -26,7 +26,7 @@ void ButtonGroup::loopButtons(){
 		b.buttonState = digitalRead(b.pin);
 		
 		if (b.buttonState == 0 && b.lastButtonState == 1) {
-			(b.f(2));
+			(b.f());
 		}
 		
 		b.lastButtonState = b.buttonState;
