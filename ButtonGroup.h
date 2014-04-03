@@ -8,6 +8,7 @@ struct button {
 	int buttonState;
 	int lastButtonState;
 	int pin;
+	int mode;
 	void (*f)();
 };
 
@@ -15,7 +16,10 @@ class ButtonGroup {
 public:
 	ButtonGroup(int dimension);
 	~ButtonGroup();
-	virtual void addButton(int pin, void (*f)());
+	// mode = 0: falling edge
+	// mode = 1: rising edge
+	// mode = 2: long click
+	virtual void addButton(int pin, void (*f)(), int mode);
 	virtual void loopButtons();
 
 private:
