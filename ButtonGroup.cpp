@@ -3,6 +3,7 @@
 ButtonGroup::ButtonGroup(int dimension) {
 
 	buttons = new button[dimension];
+	long_click_threshold = 1000;
 	count = 0;
 }
 
@@ -39,13 +40,15 @@ void ButtonGroup::loopButtons(){
 			if (b.buttonState == 1 && b.lastButtonState == 0) {
 				b.last_rising = current;
 			}
-			if(b.buttonState == 0 && b.lastButtonState == 1 && current-b.last_rising > 1000) {
+			if(b.buttonState == 0 && b.lastButtonState == 1 && current-b.last_rising > long_click_threshold) {
 				(b.f());
 			}
 			break;
 		}
-
-		
 		b.lastButtonState = b.buttonState;
 	}
+}
+
+void ButtonGroup::setLongClickThreshold(long threshold) {
+	long_click_threshold = threshold;
 }

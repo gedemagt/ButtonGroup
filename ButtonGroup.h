@@ -20,11 +20,13 @@ public:
 	// mode = 0: falling edge
 	// mode = 1: rising edge
 	// mode = 2: long click
-	virtual void addButton(int pin, void (*f)(), int mode);
-	virtual void loopButtons();
+	void addButton(int pin, void (*f)(), int mode);
+	void loopButtons();
+	void setLongClickThreshold(long threshold);
 
 private:
 	button* buttons;
 	int count;
+	long long_click_threshold;
 };
 #endif
