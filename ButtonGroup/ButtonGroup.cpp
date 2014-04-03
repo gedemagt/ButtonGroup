@@ -1,10 +1,12 @@
 #include "ButtonGroup.h"
+#include <assert.h> 
 
 ButtonGroup::ButtonGroup(int dimension) {
 
 	buttons = new button[dimension];
 	long_click_threshold = 1000;
 	count = 0;
+	dim = dimension;
 }
 
  ButtonGroup::~ButtonGroup() {
@@ -14,6 +16,8 @@ ButtonGroup::ButtonGroup(int dimension) {
 }
 
  void ButtonGroup::addButton(int pin, void (*f)(), int mode){
+	assert(count<dim);
+	assert(mode<3 && mode>=0);
 	button b = {0, 0, pin, mode, f, 0};
 	buttons[count] = b;
 	pinMode(pin, INPUT);

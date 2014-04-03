@@ -27,6 +27,7 @@ public:
 private:
 	button* buttons;
 	int count;
+	int dim;
 	long long_click_threshold;
 };
 #endif
