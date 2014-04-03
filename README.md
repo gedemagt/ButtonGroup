@@ -3,7 +3,14 @@ ButtonGroup
 
 A little library to control a press-button for the Arduino platform.
 
-It is pretty easy used:
+It is pretty easy used. The available methods are:
+
+``` cpp
+ButtonGroup(int dimension);
+void addButton(int pin, void (*f)(), int mode);
+void loopButtons();
+void setLongClickThreshold(long threshold);
+```
 
 Initialize a ButtonGroup with the desired maximum number of buttons.
 Add the buttons you want to use in the setup() method. The inputs are:
