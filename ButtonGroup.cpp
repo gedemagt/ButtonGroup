@@ -7,6 +7,9 @@ ButtonGroup::ButtonGroup(int dimension) {
 	long_click_threshold = 1000;
 	count = 0;
 	dim = dimension;
+	debounce_time = 10;
+	
+	current = millis();
 }
 
  ButtonGroup::~ButtonGroup() {
@@ -25,10 +28,14 @@ ButtonGroup::ButtonGroup(int dimension) {
 }
 
 void ButtonGroup::loopButtons(){
+
+	if((current + debounce_time) > millis()) return;
+	current = millis();
+	
+	
 	for(int i=0; i<count; i++) {
 		button& b = buttons[i];
-		long current = millis();
-		int buttonState = digitalRead(b.pin);
+		buttonState = digitalRead(b.pin);
 		switch(b.mode) {
 		case 0:
 			if (buttonState == 0 && b.lastButtonState == 1) {
@@ -53,6 +60,11 @@ void ButtonGroup::loopButtons(){
 	}
 }
 
+
 void ButtonGroup::setLongClickThreshold(long threshold) {
 	long_click_threshold = threshold;
+}
+
+void ButtonGroup::setDebounce(long debounce) {
+	debounce_time = debounce;
 }

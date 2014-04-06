@@ -5,9 +5,9 @@
 #include "Arduino.h"
 
 struct button {
-	int lastButtonState;
-	int pin;
-	int mode;
+	uint8_t lastButtonState;
+	uint8_t pin;
+	uint8_t mode;
 	void (*f)();
 	long last_rising;
 };
@@ -22,11 +22,15 @@ public:
 	void addButton(int pin, void (*f)(), int mode);
 	void loopButtons();
 	void setLongClickThreshold(long threshold);
+	void setDebounce(long debounce);
 
 private:
-	button* buttons;
-	int count;
-	int dim;
-	long long_click_threshold;
+	button* buttons; // An array with the buttons
+	uint8_t count; // The number of buttons
+	uint8_t dim; // The allocated array size
+	long long_click_threshold; // How long before a long click is toggled
+	long debounce_time; // How long we wait for debouncing
+	uint8_t buttonState; // The current read button state
+	long current; // The current time reading
 };
 #endif
